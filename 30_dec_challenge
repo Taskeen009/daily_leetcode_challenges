@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& g) {
+      vector<vector<int>> ans;
+      queue<pair<int,vector<int>>> q;
+      q.push({0,{0}});
+      while(!q.empty())
+      {
+         auto x=q.front().first;
+         auto t=q.front().second;
+         q.pop();
+         if(x==g.size()-1)
+         ans.push_back(t);
+
+         for(auto it: g[x])
+         {
+             t.push_back(it);
+             q.push({it,t});
+             t.pop_back();
+         } 
+      } 
+      return ans; 
+    }
+};
