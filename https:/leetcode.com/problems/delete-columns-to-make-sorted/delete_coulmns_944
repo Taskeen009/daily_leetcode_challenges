@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int minDeletionSize(vector<string>& strs) {
+       // int row=strs.size();
+        int col=strs[0].size();
+        int c=0;
+        for(int i=0;i<col;i++)
+        {
+            int row=0;
+            while(row<strs.size()-1)
+            {
+                if(strs[row][i]>strs[row+1][i])
+                {
+                    c++;
+                    break;
+                }
+                row++;
+            }
+        }
+        return c;
+    }
+};
