@@ -1,0 +1,53 @@
+//2583. Kth Largest Sum in a Binary Tree
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    long long kthLargestLevelSum(TreeNode* root, int k) {
+        vector<long long > total_sum;
+        if(root==NULL)
+        return -1;
+        queue<TreeNode *> q;
+        q.push(root);
+        q.push(NULL);
+        long long sum=0;
+        while(!q.empty())
+        {   
+            TreeNode* temp=q.front();
+            q.pop();
+            if(temp!=NULL)
+            {
+               sum=sum+temp->val;
+               if(temp->left!=NULL)
+               q.push(temp->left);
+               if(temp->right!=NULL)
+               q.push(temp->right);
+            }
+            else if(!q.empty())
+            {
+                q.push(NULL);
+                total_sum.push_back(sum);
+                sum=0;
+            }
+        }
+        total_sum.push_back(sum);
+        sort(total_sum.rbegin(), total_sum.rend());
+        // cout<<"Sum";
+        // cout<<sum;
+        if (k <= total_sum.size()) {
+            return total_sum[k - 1]; // Return the k-th largest sum (1-based index)
+        } else {
+            return -1; // Not enough levels
+        }
+    }
+};
