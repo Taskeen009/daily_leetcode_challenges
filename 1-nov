@@ -1,0 +1,25 @@
+1957. Delete Characters to Make Fancy String
+
+class Solution {
+public:
+    string makeFancyString(string s) {
+         int count = 1;  // Start with 1 for the first character
+        string ans;
+        ans.push_back(s[0]);  // Add the first character
+
+        for (int i = 1; i < s.length(); i++) {
+            if (s[i] == s[i - 1]) {
+                count++;
+            } else {
+                count = 1;  // Reset count for a new character
+            }
+
+            // Only add character if the count is less than or equal to 2
+            if (count <= 2) {
+                ans.push_back(s[i]);
+            }
+        }
+
+        return ans;
+    }
+};
