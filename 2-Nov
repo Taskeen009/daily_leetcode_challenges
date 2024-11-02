@@ -1,0 +1,25 @@
+2490. Circular Sentence
+
+class Solution {
+public:
+    bool isCircularSentence(string str) {
+        int n = str.length();
+        
+        // Check if the first and last characters are the same
+        if (str[0] != str[n - 1]) {
+            return false;
+        }
+        
+        // Check spaces between words
+        for (int i = 1; i < n; i++) {
+            if (str[i] == ' ') {
+                // Ensure we are not at the beginning or end of the string
+                if (i > 0 && i < n - 1 && str[i - 1] != str[i + 1]) {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+};
