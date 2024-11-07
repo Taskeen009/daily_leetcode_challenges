@@ -1,0 +1,20 @@
+2275. Largest Combination With Bitwise AND Greater Than Zero
+
+class Solution {
+public:
+    int largestCombination(vector<int>& candidates) {
+         // Array to keep track of the count of `1`s in each bit position
+    int bit_counts[24] = {0}; // 24 bits, as 2^24 > 10^7
+        for (int num : candidates) {
+        for (int bit = 0; bit < 24; ++bit) {
+            // Check if the `bit`-th bit is set in `num`
+            if (num & (1 << bit)) {
+                bit_counts[bit]++;
+            }
+        }
+    }
+
+    // The largest combination size is the maximum value in bit_counts
+    return *std::max_element(bit_counts, bit_counts + 24);
+    }
+};
