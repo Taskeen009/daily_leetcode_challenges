@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int maxCount(vector<int>& banned, int n, int maxSum) {
+        int count = 0;    // Count of numbers added
+    int sum = 0;      // Current sum of selected numbers
+    unordered_set<int> mp(banned.begin(), banned.end()); // Create unordered_set from vector
+
+    // Iterate through numbers in the range [1, n]
+    for (int i = 1; i <= n; i++) {
+        // Skip numbers in the banned set
+        if (mp.find(i) != mp.end()) {
+            continue;
+        }
+
+        // Check if adding the current number exceeds maxSum
+        if (sum + i > maxSum) {
+            break;
+        }
+
+        // Add the number to the sum and increment the count
+        sum += i;
+        count++;
+    }
+    return count;
+    }
+};
